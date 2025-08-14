@@ -16,11 +16,12 @@
         justify-content: center;
         padding-top: 50px;
         color: #333;
+        line-height: 1.6;
       }
 
       .subject-container {
         width: 90%;
-        max-width: 600px; /* Increased width slightly */
+        max-width: 600px;
         background: #ffffff;
         padding: 25px 30px;
         border-radius: 15px;
@@ -31,15 +32,11 @@
         text-align: center;
         color: #2c3e50;
         margin-bottom: 25px;
+        font-size: 2.2em;
       }
 
-      /* --- Dropdown Styling --- */
-      .dropdown {
-        position: relative;
-        margin-bottom: 12px;
-      }
-
-      .dropdown-btn {
+      .topic-button {
+        display: block;
         background: #1b0b58;
         color: white;
         padding: 15px 20px;
@@ -50,386 +47,245 @@
         border-radius: 10px;
         width: 100%;
         text-align: left;
+        margin-bottom: 12px;
+        text-decoration: none;
         transition: background-color 0.3s ease, transform 0.2s ease;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
         box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
       }
 
-      .dropdown-btn:hover {
+      .topic-button:hover {
         background-color: #2a1a7a;
       }
 
-      .dropdown-btn:active {
-        transform: scale(0.99); /* Slight press effect */
-      }
-
-      /* Arrow Icon using a pseudo-element */
-      .dropdown-btn::after {
-        content: "▶";
-        font-size: 12px;
-        transform: rotate(0deg);
-        transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Bouncy effect */
-      }
-
-      /* Rotate arrow when dropdown is active/open */
-      .dropdown-btn.active::after {
-        transform: rotate(90deg);
-      }
-
-      /* --- Dropdown Content & Animation --- */
-      .dropdown-content {
-        background-color: #f9f9f9;
-        /* Hide content by default */
-        max-height: 0;
-        overflow: hidden;
-        margin-top: 5px;
-        border-radius: 10px;
-        box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.05);
-        /* Smooth transition for the slide-down effect */
-        transition: max-height 0.8s ease-in-out; /* Slightly slower for longer lists */
-      }
-
-      /* Class added by JavaScript to show the content */
-      .dropdown-content.show {
-        /* Increased max-height to accommodate 60+ topics.
-       This value should be larger than the height of your longest topic list. */
-        max-height: 5000px;
-      }
-
-      /* Links inside the dropdown */
-      .dropdown-content a {
-        color: #555;
-        padding: 14px 25px;
-        text-decoration: none;
-        display: block;
-        transition: background-color 0.2s ease, padding-left 0.2s ease;
-        border-bottom: 1px solid #e0e0e0;
-      }
-
-      .dropdown-content a:last-child {
-        border-bottom: none;
-      }
-
-      .dropdown-content a:hover {
-        background-color: #e9ecef;
-        padding-left: 30px;
-        color: #2980b9;
+      .topic-button:active {
+        transform: scale(0.99);
       }
     </style>
   </head>
+
   <body>
     <div class="subject-container" id="subject-menu">
       <h1>সাধারণ জ্ঞান</h1>
-      <!-- The dropdown menu will be dynamically generated here -->
     </div>
 
     <script>
       const chaptersData = [
         {
-          id: "ch1",
-          title: "অধ্যায়-১: বাংলাদেশ বিষয়ক",
-          topics: [
-            {
-              title: "১.১ - ভৌগলিক অবস্থান, আয়তন, সীমানা, ছিটমহল",
-              url: "https://medicalprostuti.github.io/g1/",
-            },
-            {
-              title:
-                "১.২ - ভূ-প্রকৃতি, পাহাড়-পর্বত, উপত্যকা, জলপ্রপাত, ঝর্ণা, হ্রদ, চর, বিল, হাওড়, বাওড়",
-              url: "https://medicalprostuti.github.io/g2/",
-            },
-            {
-              title: "১.৩ - জাতীয় বিষয়াবলি",
-              url: "https://medicalprostuti.github.io/g3/",
-            },
-            {
-              title: "১.৪ - ভৌগলিক উপনাম",
-              url: "https://medicalprostuti.github.io/g4/",
-            },
-            {
-              title:
-                "১.৫ - ভূ-প্রকৃতি, পাহাড়-পর্বত, উপত্যকা, জলপ্রপাত, ঝর্ণা, হ্রদ, চর, বিল, হাওড়, বাওড়",
-              url: "https://medicalprostuti.github.io/g5/",
-            },
-            {
-              title: "১.৬ - বনজ সম্পদ",
-              url: "https://medicalprostuti.github.io/g6/",
-            },
-            {
-              title: "১.৭ - মাটি ও কৃষিজ সম্পদ",
-              url: "https://medicalprostuti.github.io/g7/",
-            },
-            {
-              title: "১.৮ - জ্বালানি, বিদ্যুৎ ও খনিজ সম্পদ",
-              url: "https://medicalprostuti.github.io/g8/",
-            },
-            {
-              title: "১.৯ - মৎস্য ও প্রাণিসম্পদ",
-              url: "https://medicalprostuti.github.io/g9/",
-            },
-            {
-              title: "১.১০ - নদ-নদী, পানি বণ্টন চুক্তি",
-              url: "https://medicalprostuti.github.io/g10/",
-            },
-            {
-              title: "১.১১ - বঙ্গোপসাগর, সমুদ্র সৈকত, দ্বীপ",
-              url: "https://medicalprostuti.github.io/g11/",
-            },
-            {
-              title:
-                "১.১২ - সেচ প্রকল্প, বাঁধ, বন্যা নিয়ন্ত্রণ, পানি শোধনাগার",
-              url: "https://medicalprostuti.github.io/g12/",
-            },
-            {
-              title: "১.১৩ - প্রাকৃতিক দুর্যোগ",
-              url: "https://medicalprostuti.github.io/g13/",
-            },
-            {
-              title: "১.১৪ - প্রাচীন বাংলার ইতিহাস ও জনপদ",
-              url: "https://medicalprostuti.github.io/g14/",
-            },
-            {
-              title: "১.১৫ - প্রাচীন বাংলায় বিভিন্ন শাসনামল",
-              url: "https://medicalprostuti.github.io/g15/",
-            },
-            {
-              title: "১.১৬ - উপমহাদেশে মুঘল সাম্রাজ্য",
-              url: "https://medicalprostuti.github.io/g16/",
-            },
-            {
-              title: "১.১৭ - বাংলায় মুসলিম শাসন",
-              url: "https://medicalprostuti.github.io/g17/",
-            },
-            {
-              title: "১.১৮ - ঐতিহাসিক স্থান ও দর্শনীয় স্থাপনা",
-              url: "https://medicalprostuti.github.io/g18/",
-            },
-            {
-              title: "১.১৯ - ইউরোপীয়দের আগমন ও ব্রিটিশ শাসন",
-              url: "https://medicalprostuti.github.io/g19/",
-            },
-            {
-              title: "১.২০ - সংস্কার আন্দোলন ও বাংলার জাগরণ",
-              url: "https://medicalprostuti.github.io/g20/",
-            },
-            {
-              title: "১.২১ - রাজনৈতিক অধিকার আন্দোলন",
-              url: "https://medicalprostuti.github.io/g21/",
-            },
-            {
-              title: "১.২২ - উল্লেখযোগ্য ও স্মরণীয় ঘটনা",
-              url: "https://medicalprostuti.github.io/g22/",
-            },
-            {
-              title: "১.২৩ - ভাষা আন্দোলন ও '৫৪-এর নির্বাচন",
-              url: "https://medicalprostuti.github.io/g23/",
-            },
-            {
-              title: "১.২৪ - ঊনসত্তরের গণঅভ্যুত্থান ও আগরতলা ষড়যন্ত্র মামলা",
-              url: "https://medicalprostuti.github.io/g24/",
-            },
-            {
-              title: "১.২৫ - ভাষা আন্দোলন ও '৫৪-এর নির্বাচন",
-              url: "https://medicalprostuti.github.io/g25/",
-            },
-            {
-              title: "১.২৬ - মুক্তিযুদ্ধ",
-              url: "https://medicalprostuti.github.io/g26/",
-            },
-            {
-              title: "১.২৭ - জনতত্ত্ব",
-              url: "https://medicalprostuti.github.io/g27/",
-            },
-            {
-              title: "১.২৮ - অর্থনীতি ও বাজেট",
-              url: "https://medicalprostuti.github.io/g28/",
-            },
-            {
-              title: "১.২৯ - সংবিধান (পুনরাবৃত্তি)",
-              url: "https://medicalprostuti.github.io/g29/",
-            },
-            {
-              title: "১.৩০ - জাতীয় সংসদ (National Parliament)",
-              url: "https://medicalprostuti.github.io/g30/",
-            },
-            {
-              title:
-                "১.৩১ - স্থানীয় সরকার ব্যবস্থা, বিভাগ ও জেলা পরিচিতি (Local Government System, Divisions and District পরিচিতি)",
-              url: "https://medicalprostuti.github.io/g31/",
-            },
-            {
-              title: "১.৩২ - আইন ও বিচার বিভাগ (Law and Judiciary)",
-              url: "https://medicalprostuti.github.io/g32/",
-            },
-            {
-              title:
-                "১.৩৩ - সংবিধান ও সাংবিধানিক পদসমূহ (Constitution and Constitutional Posts)",
-              url: "https://medicalprostuti.github.io/g33/",
-            },
-            {
-              title: "১.৩৪ - বাংলাদেশের অর্জন (Achievements of Bangladesh)",
-              url: "https://medicalprostuti.github.io/g34/",
-            },
-            {
-              title:
-                "১.৩৫ - পররাষ্ট্রনীতি ও কূটনৈতিক মিশন (Foreign Policy and Diplomatic Missions)",
-              url: "https://medicalprostuti.github.io/g35/",
-            },
-            {
-              title:
-                "১.৩৬ - ঐতিহাসিক স্থান ও দর্শনীয় স্থাপনা (Historical Places and Tourist Attractions)",
-              url: "https://medicalprostuti.github.io/g36/",
-            },
-            {
-              title: "১.৩৭ - শিল্প ও সংস্কৃতি (Art and Culture)",
-              url: "https://medicalprostuti.github.io/g37/",
-            },
-            {
-              title: "১.৩৮ - ইউনেস্কো (UNESCO) ও বাংলাদেশ",
-              url: "https://medicalprostuti.github.io/g38/",
-            },
-            {
-              title: "১.৩৯ - বাংলা সাহিত্য (Bengali Literature)",
-              url: "https://medicalprostuti.github.io/g39/",
-            },
-            {
-              title: "১.৪০ - বাংলা সংবাদপত্র (Bengali Newspapers)",
-              url: "https://medicalprostuti.github.io/g40/",
-            },
-            {
-              title: "১.৪১ - বিখ্যাত ব্যক্তিবর্গ (Famous Personalities)",
-              url: "https://medicalprostuti.github.io/g41/",
-            },
-            {
-              title:
-                "১.৪২ - ঐতিহাসিক স্থান ও দর্শনীয় স্থাপনা (Historical Places and Tourist Attractions)",
-              url: "https://medicalprostuti.github.io/g42/",
-            },
-            {
-              title:
-                "১.৪৩ - যোগাযোগ ব্যবস্থা ও তথ্যপ্রযুক্তি (Communication System and Information Technology)",
-              url: "https://medicalprostuti.github.io/g43/",
-            },
-            {
-              title: "১.৪৪ - পুরস্কার ও সম্মাননা (Awards and Honors)",
-              url: "https://medicalprostuti.github.io/g44/",
-            },
-            {
-              title: "১.৪৫ - শিক্ষা (Education)",
-              url: "https://medicalprostuti.github.io/g45/",
-            },
-            {
-              title: "১.৪৬ - খেলাধুলা (Sports)",
-              url: "https://medicalprostuti.github.io/g46/",
-            },
-            {
-              title: "১.৪৭ - দিবসসমূহ (Days)",
-              url: "https://medicalprostuti.github.io/g47/",
-            },
-            {
-              title: "১.৪৮ - অর্থনীতি ও ব্যবসা (Economy and Business)",
-              url: "https://medicalprostuti.github.io/g48/",
-            },
-            {
-              title: "১.৪৯ - সমাজ ও সংস্কৃতি (Society and Culture)",
-              url: "https://medicalprostuti.github.io/g49/",
-            },
-            {
-              title: "১.৫০ - দুর্যোগ ও দুর্ঘটনা (Disasters and Accidents)",
-              url: "https://medicalprostuti.github.io/g50/",
-            },
-            {
-              title:
-                "১.৫১ - সংস্থা ও কর্তৃপক্ষ (Organizations and Authorities)",
-              url: "https://medicalprostuti.github.io/g51/",
-            },
-          ],
+          title: "ভৌগলিক অবস্থান, আয়তন, সীমানা, ছিটমহল",
+          url: "https://medicalprostuti.github.io/g1/",
         },
-
-        // Add more chapters as needed
+        {
+          title: "ভূ-প্রকৃতি, পাহাড়-পর্বত, উপত্যকা, জলপ্রপাত, ঝর্ণা, হ্রদ, চর, বিল, হাওড়, বাওড়",
+          url: "https://medicalprostuti.github.io/g2/",
+        },
+        {
+          title: "জাতীয় বিষয়াবলি",
+          url: "https://medicalprostuti.github.io/g3/",
+        },
+        {
+          title: "ভৌগলিক উপনাম",
+          url: "https://medicalprostuti.github.io/g4/",
+        },
+        {
+          title: "ভূ-প্রকৃতি, পাহাড়-পর্বত, উপত্যকা, জলপ্রপাত, ঝর্ণা, হ্রদ, চর, বিল, হাওড়, বাওড়",
+          url: "https://medicalprostuti.github.io/g5/",
+        },
+        {
+          title: "বনজ সম্পদ",
+          url: "https://medicalprostuti.github.io/g6/",
+        },
+        {
+          title: "মাটি ও কৃষিজ সম্পদ",
+          url: "https://medicalprostuti.github.io/g7/",
+        },
+        {
+          title: "জ্বালানি, বিদ্যুৎ ও খনিজ সম্পদ",
+          url: "https://medicalprostuti.github.io/g8/",
+        },
+        {
+          title: "মৎস্য ও প্রাণিসম্পদ",
+          url: "https://medicalprostuti.github.io/g9/",
+        },
+        {
+          title: "নদ-নদী, পানি বণ্টন চুক্তি",
+          url: "https://medicalprostuti.github.io/g10/",
+        },
+        {
+          title: "বঙ্গোপসাগর, সমুদ্র সৈকত, দ্বীপ",
+          url: "https://medicalprostuti.github.io/g11/",
+        },
+        {
+          title: "সেচ প্রকল্প, বাঁধ, বন্যা নিয়ন্ত্রণ, পানি শোধনাগার",
+          url: "https://medicalprostuti.github.io/g12/",
+        },
+        {
+          title: "প্রাকৃতিক দুর্যোগ",
+          url: "https://medicalprostuti.github.io/g13/",
+        },
+        {
+          title: "প্রাচীন বাংলার ইতিহাস ও জনপদ",
+          url: "https://medicalprostuti.github.io/g14/",
+        },
+        {
+          title: "প্রাচীন বাংলায় বিভিন্ন শাসনামল",
+          url: "https://medicalprostuti.github.io/g15/",
+        },
+        {
+          title: "উপমহাদেশে মুঘল সাম্রাজ্য",
+          url: "https://medicalprostuti.github.io/g16/",
+        },
+        {
+          title: "বাংলায় মুসলিম শাসন",
+          url: "https://medicalprostuti.github.io/g17/",
+        },
+        {
+          title: "ঐতিহাসিক স্থান ও দর্শনীয় স্থাপনা",
+          url: "https://medicalprostuti.github.io/g18/",
+        },
+        {
+          title: "ইউরোপীয়দের আগমন ও ব্রিটিশ শাসন",
+          url: "https://medicalprostuti.github.io/g19/",
+        },
+        {
+          title: "সংস্কার আন্দোলন ও বাংলার জাগরণ",
+          url: "https://medicalprostuti.github.io/g20/",
+        },
+        {
+          title: "রাজনৈতিক অধিকার আন্দোলন",
+          url: "https://medicalprostuti.github.io/g21/",
+        },
+        {
+          title: "উল্লেখযোগ্য ও স্মরণীয় ঘটনা",
+          url: "https://medicalprostuti.github.io/g22/",
+        },
+        {
+          title: "ভাষা আন্দোলন ও '৫৪-এর নির্বাচন",
+          url: "https://medicalprostuti.github.io/g23/",
+        },
+        {
+          title: "ঊনসত্তরের গণঅভ্যুত্থান ও আগরতলা ষড়যন্ত্র মামলা",
+          url: "https://medicalprostuti.github.io/g24/",
+        },
+        {
+          title: "ভাষা আন্দোলন ও '৫৪-এর নির্বাচন",
+          url: "https://medicalprostuti.github.io/g25/",
+        },
+        {
+          title: "মুক্তিযুদ্ধ",
+          url: "https://medicalprostuti.github.io/g26/",
+        },
+        {
+          title: "জনতত্ত্ব",
+          url: "https://medicalprostuti.github.io/g27/",
+        },
+        {
+          title: "অর্থনীতি ও বাজেট",
+          url: "https://medicalprostuti.github.io/g28/",
+        },
+        {
+          title: "সংবিধান (পুনরাবৃত্তি)",
+          url: "https://medicalprostuti.github.io/g29/",
+        },
+        {
+          title: "জাতীয় সংসদ",
+          url: "https://medicalprostuti.github.io/g30/",
+        },
+        {
+          title: "স্থানীয় সরকার ব্যবস্থা, বিভাগ ও জেলা পরিচিতি",
+          url: "https://medicalprostuti.github.io/g31/",
+        },
+        {
+          title: "আইন ও বিচার বিভাগ",
+          url: "https://medicalprostuti.github.io/g32/",
+        },
+        {
+          title: "সংবিধান ও সাংবিধানিক পদসমূহ",
+          url: "https://medicalprostuti.github.io/g33/",
+        },
+        {
+          title: "বাংলাদেশের অর্জন",
+          url: "https://medicalprostuti.github.io/g34/",
+        },
+        {
+          title: "পররাষ্ট্রনীতি ও কূটনৈতিক মিশন",
+          url: "https://medicalprostuti.github.io/g35/",
+        },
+        {
+          title: "ঐতিহাসিক স্থান ও দর্শনীয় স্থাপনা",
+          url: "https://medicalprostuti.github.io/g36/",
+        },
+        {
+          title: "শিল্প ও সংস্কৃতি",
+          url: "https://medicalprostuti.github.io/g37/",
+        },
+        {
+          title: "ইউনেস্কো ও বাংলাদেশ",
+          url: "https://medicalprostuti.github.io/g38/",
+        },
+        {
+          title: "বাংলা সাহিত্য",
+          url: "https://medicalprostuti.github.io/g39/",
+        },
+        {
+          title: "বাংলা সংবাদপত্র",
+          url: "https://medicalprostuti.github.io/g40/",
+        },
+        {
+          title: "বিখ্যাত ব্যক্তিবর্গ",
+          url: "https://medicalprostuti.github.io/g41/",
+        },
+        {
+          title: "ঐতিহাসিক স্থান ও দর্শনীয় স্থাপনা",
+          url: "https://medicalprostuti.github.io/g42/",
+        },
+        {
+          title: "যোগাযোগ ব্যবস্থা ও তথ্যপ্রযুক্তি",
+          url: "https://medicalprostuti.github.io/g43/",
+        },
+        {
+          title: "পুরস্কার ও সম্মাননা",
+          url: "https://medicalprostuti.github.io/g44/",
+        },
+        {
+          title: "শিক্ষা",
+          url: "https://medicalprostuti.github.io/g45/",
+        },
+        {
+          title: "খেলাধুলা",
+          url: "https://medicalprostuti.github.io/g46/",
+        },
+        {
+          title: "দিবসসমূহ",
+          url: "https://medicalprostuti.github.io/g47/",
+        },
+        {
+          title: "অর্থনীতি ও ব্যবসা",
+          url: "https://medicalprostuti.github.io/g48/",
+        },
+        {
+          title: "সমাজ ও সংস্কৃতি",
+          url: "https://medicalprostuti.github.io/g49/",
+        },
+        {
+          title: "দুর্যোগ ও দুর্ঘটনা",
+          url: "https://medicalprostuti.github.io/g50/",
+        },
+        {
+          title: "সংস্থা ও কর্তৃপক্ষ",
+          url: "https://medicalprostuti.github.io/g51/",
+        },
       ];
 
       document.addEventListener("DOMContentLoaded", function () {
         const menuContainer = document.getElementById("subject-menu");
-
-        // --- 1. Function to Generate the Menu ---
-        function generateMenu() {
-          // Loop through each chapter in the data object
-          chaptersData.forEach((chapter) => {
-            // Create the main container for the dropdown
-            const dropdownDiv = document.createElement("div");
-            dropdownDiv.className = "dropdown";
-
-            // Create the button for the chapter
-            const button = document.createElement("button");
-            button.className = "dropdown-btn";
-            button.textContent = chapter.title;
-
-            // Create the container for the topics
-            const contentDiv = document.createElement("div");
-            contentDiv.className = "dropdown-content";
-
-            // Loop through the topics for the current chapter
-            chapter.topics.forEach((topic) => {
-              const link = document.createElement("a");
-              link.textContent = topic.title;
-              link.href = topic.url;
-              contentDiv.appendChild(link);
-            });
-
-            // Assemble the parts
-            dropdownDiv.appendChild(button);
-            dropdownDiv.appendChild(contentDiv);
-
-            // Add the completed dropdown to the main container
-            menuContainer.appendChild(dropdownDiv);
-          });
-        }
-
-        // --- 2. Function to Add Event Listeners ---
-        function attachEventListeners() {
-          const allDropdownBtns =
-            menuContainer.querySelectorAll(".dropdown-btn");
-
-          allDropdownBtns.forEach((btn) => {
-            btn.addEventListener("click", function (event) {
-              const currentContent = this.nextElementSibling;
-              const isAlreadyOpen = this.classList.contains("active");
-
-              // First, close all other dropdowns
-              allDropdownBtns.forEach((otherBtn) => {
-                if (otherBtn !== this) {
-                  // Don't close the one we are interacting with yet
-                  otherBtn.classList.remove("active");
-                  otherBtn.nextElementSibling.classList.remove("show");
-                }
-              });
-
-              // Toggle the clicked dropdown
-              this.classList.toggle("active");
-              currentContent.classList.toggle("show");
-
-              event.stopPropagation();
-            });
-          });
-
-          // Optional: Close dropdowns if clicking outside
-          window.addEventListener("click", function (event) {
-            // Check if the click was outside of any dropdown button
-            if (!event.target.matches(".dropdown-btn")) {
-              allDropdownBtns.forEach((btn) => {
-                btn.classList.remove("active");
-                btn.nextElementSibling.classList.remove("show");
-              });
-            }
-          });
-        }
-
-        // --- 3. Initialize the Menu ---
-        generateMenu();
-        attachEventListeners();
+        
+        chaptersData.forEach((topic, index) => {
+          const buttonLink = document.createElement("a");
+          buttonLink.className = "topic-button";
+          buttonLink.textContent = (index + 1) + ". " + topic.title;
+          buttonLink.href = topic.url;
+          menuContainer.appendChild(buttonLink);
+        });
       });
     </script>
   </body>
